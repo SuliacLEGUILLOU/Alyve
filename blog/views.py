@@ -105,6 +105,6 @@ def add_comment(request, slug):
                 comment = Comment(username=username, content=content, publication_date=timezone.now(), article=article)
                 comment.save()
 
-            return redirect(reverse('blog:article', args=[slug, '?blabla=blablabla']))
+            return redirect(reverse('blog:article', args=[slug]))
 
     return redirect('article', slug=slug)
