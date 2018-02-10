@@ -1,1 +1,8 @@
+alyve/__pycache__/
+blog/__pycache__/
+blog/migrations/
+uploads/
+static2/
 secret_key.txt
+db.sqlite3
+gunicorn.sock
