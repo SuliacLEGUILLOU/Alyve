@@ -1,0 +1,251 @@
+/*
+** General
+*/
+
+header {
+    margin-bottom: 2em;
+}
+
+.content {
+    padding: 1em;
+}
+
+.content > .card {
+    border-radius: 0px !important;
+    margin: 3em;
+}
+
+.content > .card > img {
+    display: block;
+    margin-left: auto;
+}
+
+/*
+** Sidebar
+*/
+
+.sidebar > img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.social-media {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;   
+    padding-right: 2em;
+}
+
+.article img,
+.sidebar > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    max-width: 100%;
+}
+
+.blog_info > img {
+    border-radius: 100px;
+    margin-bottom: 2em;
+    
+}
+
+.blog_info > h3 {
+    font-weight: bold;
+}
+
+
+/*
+** Blog and articles header
+*/
+
+.ch-background .ch-header-content {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ch-header-content .maintitle {
+    font-size: 7em;
+}
+
+.ch-header-content > img {
+    border-radius: 256px;
+    margin: 2em;
+}
+
+.ch-header-content a, 
+.ch-header-content a:hover {
+    transition-duration: .2s;
+}
+
+.ch-header-content a {
+    color: white;
+}
+
+.ch-header-content a:hover {
+    color: #FF3366;
+}
+
+/*
+** Buttons customizaton 
+*/
+
+.btn { border-radius: 0px; }
+
+.btn-full-width {
+    min-width: 100%;
+}
+
+.btn-square {
+    border-radius: 0px;
+}
+
+.btn-info {
+    background-color: white !important; 
+    border: 1px solid rgba(0,0,0,0.03) !important;
+    float: right;
+}
+
+
+.btn-primary, .btn-primary:hover {
+    background: white !important;
+    border: 1px solid black;
+    color: black;
+}
+
+.btn-primary:hover {
+    background: black !important;
+    color: #F5F5F5;
+}
+
+.card-header {
+    background-color: white;
+    height: 10vh;
+}
+
+.article_description {
+    text-align: right;
+}
+
+.bold { font-weight: bold }
+
+
+.uppercase { text-transform: uppercase; }
+
+.ch-background {
+    height: 400px;
+    background: center center;
+    background-size: cover;
+    color: white;
+    display: table;
+    width: 100%; /* width of parent */
+    overflow: hidden;
+    position: relative;
+}
+
+.ch-header-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 2em;
+}
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #eee;
+    vertical-align: middle;
+}
+
+.card-body img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    object-fit: contain
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        text-align: center;
+    }
+    
+    .blog_info,
+    .blog_menu {
+        padding: 0em;
+        padding-left: 0em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    
+    section.article {
+        padding-right: 0em;
+    }
+    
+    
+}
+
+.footer {
+    width: 100%;
+    color: #F5F5F5;
+    background-color: #202020;
+    margin-top: 1em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.footer a {
+    color: #F5F5F5;
+    border: 1px solid rgba(0,0,0,0.03) !important;
+}
+
+/*
+** Navbar customization
+*/
+
+a.navbar-brand, .maintitle {
+    font-family: 'Leckerli One', cursive;
+}
+
+a.navbar-brand {
+    font-size: 3em;
+    color: #FF3366 !important;
+    transition-duration: .2s;
+}
+
+/*
+** Misc
+*/
+.margin-top { margin-top: 1em; }
+a:hover { text-decoration: none; }
+a h2 { color: black; }
+a h2:hover { color: #FF3366; }
+.italic { font-style: italic; }
+
+.no-border,
+.no-border > li {
+    border: 0px;
+    background: transparent;
+    padding: 5px;
+}
+
+
+span.page-link {
+    color: black;
+    cursor: text;
+}
+
+span.page-link:hover {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #eee;
+    cursor: text;
+}
+.margin-top {
+    display: block;
+    margin-top: 1em;
+}

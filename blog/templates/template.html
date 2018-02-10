@@ -1,0 +1,114 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ blog.name }}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
+        <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet"> 
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/css/font-awesome.min.css' %}"/>
+        <script src="{% static 'blog/js/jquery-3.2.1.slim.min.js' %}"></script>
+        <script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
+        <script src="{% static 'blog/js/blog.js' %}"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'blog:index' %}">{{ blog.name }}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                                <a class="nav-link" href="{% url 'blog:index' %}">Accueil</a>   
+                        </li>
+                        {% if pages %}
+                        {% for page in pages %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'blog:page' page.slug %}">{{ page.name }}</a>
+                        </li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <header class="ch-background" {% block header-background %}style="background-image: url('/uploads/{{ blog.cover }}')"{% endblock %}>
+            <section class="ch-header-content">
+                {% block header %}
+                <h3 class="blog-title maintitle">{{ blog.name }}</h3>
+                <p>{{ blog.description }}</p>
+                {% endblock %}
+            </section>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+                <div class="col-md-3 sidebar">
+                    {% if blog.sidebar_picture %}<img src="../../../uploads/{{ blog.sidebar_picture }}" alt="Logo">{% endif %}
+                    {% if blog.sidebar_title %}<h4 class="text-center">{{ blog.sidebar_title }}</h4>{% endif %}
+                    {% if blog.sidebar_description %}{{ blog.sidebar_description }}{% endif %}
+                    {% if categories %}
+                    <ul class="list-group no-border">
+                        {% for category in categories %}
+                        <li class="list-group-item">
+                                <a href="{% url 'blog:category' category.slug %}" type="button" class="btn btn-outline-dark btn-full-width btn-square">
+                                    {{ category.name }}
+                                </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <!--
+                    <div class="col-md-3">
+                        <span class="bold">SITEMAP</span>
+                        <ul class="list-unstyled">
+                            <li>Catégories</li>
+                            <li>Auteur·e</li>
+                            <li>Archives</li>
+                            <li>Atom</li>
+                        </ul>
+                    </div>
+                    -->
+                    <div class="col-md-4">
+                        {% if social %}
+                        <span class="bold">SOCIAL</span>
+                        <ul class="list-unstyled">
+                            {% for s in social %}
+                            <li><a href="{{ s.link }}">{{ s.shortcut }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4">
+                        {% if links %}
+                        <span class="bold">LIENS</span>
+                        <ul class="list-unstyled">
+                            {% for link in links %}
+                            <li><a href="{{ link.link }}">{{ link.shortcut }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p class="italic">Theme and code by Alysson.</br>
+                        © Alyve 2017 - 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

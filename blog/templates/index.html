@@ -1,0 +1,27 @@
+{% extends 'template.html' %}
+{% load markdown_deux_tags %}
+
+{% block title %} - {{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    {% if articles %}
+        {% include "includes/pagination.html" %}
+
+        {% for article in articles %}
+            <div class="card{% if not foorlop.first %} margin-top{% endif %}">
+                <div class="card-body index-list">
+                    <a href="{% url 'blog:article' article.slug %}"><h4 class="card-title">{{ article.title }}</h4></a>
+                    <small>Écrit par {{ article.author }} le {{ article.publication_date|date }} dans <a href="{% url 'blog:category' article.category.slug %}">{{ article.category }}</a></small> 
+                </div>
+            </div> 
+        {% endfor %}
+        <span class="margin-top"></span>
+        {% include "includes/pagination.html" %}
+    {% else %}
+        <h4 class="title">Oops! Il n'y a pas encore d'article ici.</h4>
+    {% endif %}
+</div>
+{% endblock %}
+

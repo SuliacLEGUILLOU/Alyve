@@ -1,0 +1,73 @@
+{% extends 'template.html' %}
+{% load markdown_deux_tags %}
+{% load static %}
+
+{% block title %} - {{ article.title }}{% endblock %}
+
+
+{% block header-background %}
+    {% if article.cover %}
+        style="background-image: url('/uploads/{{ article.cover }}');"
+    {% elif blog.cover %}
+        style="background-image: url('/uploads/{{ blog.cover }}');"
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    <h3 class="maintitle">{{ article.title }}</h3>
+    <i class="fa fa-clock-o" aria-hidden="true"></i> Écrit le {{ article.publication_date|date }} |
+    <i class="fa fa-user" aria-hidden="true"></i> Par {{ article.author }} |
+    <i class="fa fa-comments" aria-hidden="true"></i> <a href="#comments">{{ comments|length }} commentaire{% if comments|length > 1 %}s{% endif %}</a> |
+    <i class="fa fa-folder" aria-hidden="true"></i> <a href="{% url 'blog:category' article.category.slug %}">{{ article.category.name }}</a>
+{% endblock %}
+
+{% block content %}
+    <section class="article">
+        {{ article.content|markdown }}
+
+        <hr>
+        {% if comments %}
+        <h4 id="comments">Commentaires {% if comments %}({{ comments|length }}){% endif %}</h4>
+        <ul class="list-group">
+            {% for comment in comments %}
+            <li class="list-group-item">
+                <h5 class="mt-0 mb-1">Le {{ comment.publication_date|date }}, {{ comment.username }} a écrit:</h5>
+                {{ comment.content }}
+            </li>
+            {% endfor %}
+        </ul>
+        </ul>
+        {% else %}
+            <div class="alert alert-info">Il n'y a pas encore de commentaires pour cet article</div>
+        {% endif %}
+        <hr>
+        {% if question %}
+        <h4>Ajouter un commentaire</h4>
+        <form action="{% url 'blog:add_comment' article.slug %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="username" class="bold">Nom d'utilisateur:</label>
+                    <input type="text" class="form-control" name="comment_username" id="comment_username" placeholder="Votre nom d'utilisateur" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="comment" class="bold">Votre commentaire:</label>
+                    <textarea id="comment" name="comment_comment" placeholder="Votre commentaire" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="answer" class="bold">Répondez à la question: {{ question.question }}:</label>
+                    <input type="hidden" name="comment_question" value="{{ question.id }}">
+                    <input type="text" class="form-control" name="comment_answer" id="comment_answer" placeholder="42" class="form-control" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Envoyer</button>
+        </form>
+        {% else %}
+        <div class="alert alert-primary">Veuillez ajouter une ou plusieurs questions pour activer les commentaires</div>
+        {% endif %}
+    </section>
+{% endblock %}
