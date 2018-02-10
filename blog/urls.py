@@ -10,5 +10,4 @@ urlpatterns = [
     path('page/<slug:slug>', views.PageView.as_view(), name='page'),
     path('category/<slug:slug>', views.CategoryView.as_view(), name='category'),
     path('article/<slug:slug>/comment', views.add_comment, name='add_comment'),
-    path('seeds/articles', LatestArticlesFeed()),
 ]
