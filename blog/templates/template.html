@@ -48,11 +48,11 @@
         </header>
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-xl-9">
                     {% block content %}
                     {% endblock %}
                 </div>
-                <div class="col-md-3 sidebar">
+                <div class="col-xl-3 sidebar">
                     {% if blog.sidebar_picture %}<img src="../../../uploads/{{ blog.sidebar_picture }}" alt="Logo">{% endif %}
                     {% if blog.sidebar_title %}<h4 class="text-center">{{ blog.sidebar_title }}</h4>{% endif %}
                     {% if blog.sidebar_description %}{{ blog.sidebar_description|markdown }}{% endif %}
@@ -74,7 +74,7 @@
             <div class="container">
                 <div class="row">
                     <!--
-                    <div class="col-md-3">
+                    <div class="col-xl-3">
                         <span class="bold">SITEMAP</span>
                         <ul class="list-unstyled">
                             <li>Catégories</li>
@@ -84,7 +84,7 @@
                         </ul>
                     </div>
                     -->
-                    <div class="col-md-4">
+                    <div class="col-xl-4">
                         {% if social %}
                         <span class="bold">SOCIAL</span>
                         <ul class="list-unstyled">
@@ -94,7 +94,7 @@
                         </ul>
                         {% endif %}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4">
                         {% if links %}
                         <span class="bold">LIENS</span>
                         <ul class="list-unstyled">
@@ -104,7 +104,7 @@
                         </ul>
                         {% endif %}
                     </div>
-                    <div class="col-md-4 text-right">
+                    <div class="col-xl-4 text-right">
                         <p class="italic">Theme and code by Alysson.</br>
                         © Alyve 2017 - 2018</p>
                     </div>

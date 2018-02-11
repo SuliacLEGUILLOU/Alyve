@@ -249,3 +249,10 @@ span.page-link:hover {
     display: block;
     margin-top: 1em;
 }
+
+@media (max-width: 1199.98px) {
+    .sidebar img {
+        margin-top: 2em;
+        max-width: 50%;
+    }
+}

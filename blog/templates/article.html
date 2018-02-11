@@ -46,19 +46,19 @@
         <form action="{% url 'blog:add_comment' article.slug %}" method="post">
             {% csrf_token %}
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-xl-12">
                     <label for="username" class="bold">Nom d'utilisateur:</label>
                     <input type="text" class="form-control" name="comment_username" id="comment_username" placeholder="Votre nom d'utilisateur" required>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-xl-12">
                     <label for="comment" class="bold">Votre commentaire:</label>
                     <textarea id="comment" name="comment_comment" placeholder="Votre commentaire" class="form-control" required></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-xl-12">
                     <label for="answer" class="bold">Répondez à la question: {{ question.question }}:</label>
                     <input type="hidden" name="comment_question" value="{{ question.id }}">
                     <input type="text" class="form-control" name="comment_answer" id="comment_answer" placeholder="42" class="form-control" required>
