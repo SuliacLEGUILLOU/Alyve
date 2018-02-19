@@ -56,6 +56,32 @@
                     {% if blog.sidebar_picture %}<img src="../../../uploads/{{ blog.sidebar_picture }}" alt="Logo">{% endif %}
                     {% if blog.sidebar_title %}<h4 class="text-center">{{ blog.sidebar_title }}</h4>{% endif %}
                     {% if blog.sidebar_description %}{{ blog.sidebar_description|markdown }}{% endif %}
+                    <div class="social">
+                    {% if social %}
+                        {% for s in social %}
+                            {% if s.network %}
+                                {% if s.network == 'RSS_FLUX' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-rss-square" aria-hidden="true"></i></a>
+                                {% elif s.network == 'GITHUB' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-github" aria-hidden="true"></i></a>
+                                {% elif s.network == 'LINKED_IN' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-linkedin-square" aria-hidden="true"></i></a>
+                                {% elif s.network == 'INSTAGRAM' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
+                                {% elif s.network == 'FACEBOOK' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i></a>
+                                {% elif s.network == 'BITBUCKET' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-bitbucket" aria-hidden="true"></i></a>
+                                {% elif s.network == 'GOOGLE_PLUS' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-google-plus" aria-hidden="true"></i></a>
+                                {% elif s.network == 'YOUTUBE' %}
+                                    <a href="{{ s.link }}" target="_blank" ><i class="fa fa-2x fa-youtube-play" aria-hidden="true"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+
                     {% if categories %}
                     <ul class="list-group no-border">
                         {% for category in categories %}

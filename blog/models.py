@@ -9,6 +9,17 @@ from django.dispatch import receiver
 
 from slugify import slugify
 
+SOCIAL_CHOICES = (
+    ('LINKED_IN', 'Linked In'),
+    ('INSTAGRAM', 'Instagram'),
+    ('RSS_FLUX', 'Flux RSS'),
+    ('FACEBOOK', 'Facebook'),
+    ('GITHUB', 'Github'),
+    ('BITBUCKET', 'Bitbucket'),
+    ('GOOGLE_PLUS', 'Google+'),
+    ('YOUTUBE', 'Youtube')
+)
+
 class Blog(models.Model):
     name = models.CharField('Nom', max_length=255)
     description = models.CharField('Description', max_length=500, blank=True, null=True)
@@ -100,6 +111,7 @@ class Link(models.Model):
 class Social(models.Model):
     sort = models.IntegerField('Ordre', default="5")
     link = models.URLField('Lien')
+    network = models.CharField('Réseau', choices=SOCIAL_CHOICES, max_length=16, blank=True, null=True)
     shortcut = models.CharField('Titre', max_length=60)
 
     def __str__(self):
