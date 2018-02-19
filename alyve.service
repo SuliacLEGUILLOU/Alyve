@@ -1,0 +1,11 @@
+[Unit]
+Description=Start alyve application
+
+[Service]
+WorkingDirectory=/home/alysson/Development/alyve/
+Type=simple
+ExecStart=/home/alysson/Development/alyve/gunicorn_start.sh
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
