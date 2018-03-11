@@ -13,9 +13,9 @@ $ source alyve-env/bin/activate
 $ git clone git@github.com:Aly-ve/Alyve.git
 $ cd Alyve/
 $ pip3 install -r requirements.txt
-$ python3 manager.py makemigrations blog
-$ pip3 manage.py migrate
-$ pip3 managy.py createsuperuser
+$ python3 manage.py makemigrations blog
+$ python3 manage.py migrate
+$ python3 managy.py createsuperuser
 ```
 
 Create your blog on table `blog` (only one record!) and enjoy it.
