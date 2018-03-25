@@ -22,7 +22,10 @@
 {% endblock %}
 
 {% block content %}
-    <section class="article">
+    {% if article.hide_image %}
+    {% include "includes/hidden-image.html" %}
+    {% endif %}
+    <section class="article{% if article.hide_image %} hidden{% endif %}">
         {{ article.content|markdown }}
 
         <hr>

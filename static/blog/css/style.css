@@ -270,3 +270,7 @@ span.page-link:hover {
         max-width: 50%;
     }
 }
+
+.hidden img {
+    display: none;
+}

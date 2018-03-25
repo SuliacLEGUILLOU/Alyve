@@ -25,9 +25,9 @@ class QuestionAdmin(admin.ModelAdmin):
     ]
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'published', 'publication_date', 'update_date', 'comments_count', 'unvalided_comments_count')
+    list_display = ('title', 'author', 'published', 'hide_image', 'publication_date', 'update_date', 'comments_count', 'unvalided_comments_count')
     fieldsets = [
-        ('Article', {'fields': ['title', 'content', 'category', 'published', 'cover', 'author']}),
+        ('Article', {'fields': ['title', 'content', 'category', 'published', 'hide_image', 'disclaimer', 'cover', 'author']}),
         ('Date information', {'fields': ['publication_date', 'update_date']}),
     ]
 

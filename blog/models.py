@@ -61,6 +61,8 @@ class Article(models.Model):
     update_date = models.DateTimeField('Date de mise à jour', blank=True, null=True)
     published = models.BooleanField('Publié', default=False)
     cover = models.ImageField('Image de couverture', upload_to='covers/', blank=True, null=True)
+    hide_image = models.NullBooleanField('Cacher les images', default=False)
+    disclaimer = models.TextField('Disclaimer', blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(
         'Category',
