@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from .models import Article, Comment, Category, Blog, Page, Question, Link, Social
 
@@ -62,6 +63,7 @@ class ArticleView(generic.DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
+        print(context)
         context['blog'] = Blog.objects.get(pk=1)
         context['pages'] = Page.objects.filter(displayed=True)
         context['comments'] = Comment.objects.filter(article=self.object.id, valided=True).order_by('-pk')
@@ -104,7 +106,10 @@ def add_comment(request, slug):
                 article = Article.objects.get(slug=slug)
                 comment = Comment(username=username, content=content, publication_date=timezone.now(), article=article)
                 comment.save()
+                messages.add_message(request, messages.INFO, 'COMMENT_ADDED')
+            else:
+                messages.add_message(request, messages.INFO, 'WRONG_ANSWER')
+        else:
+            messages.add_message(request, messages.INFO, 'BAD_FORM')
 
-            return redirect(reverse('blog:article', args=[slug]))
-
-    return redirect('article', slug=slug)
+    return redirect(reverse('blog:article', args=[slug]))

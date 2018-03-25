@@ -21,7 +21,26 @@
     <i class="fa fa-folder" aria-hidden="true"></i> <a href="{% url 'blog:category' article.category.slug %}">{{ article.category.name }}</a>
 {% endblock %}
 
-{% block content %}
+{% block content %} 
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message|stringformat:"s" == "COMMENT_ADDED" %}
+            <div class="alert alert-success" role="alert">
+                <strong>Votre commentaire a été ajouté</strong>, il sera validé par l'administrateur·rice.
+            </div>
+            {% elif message|stringformat:"s" == "WRONG_ANSWER" %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Mince!</strong> Vous n'avez pas donner la bonne réponse à la question.
+            </div>
+            {% elif message|stringformat:"s" == "BAD_FORM" %}
+            <div class="alert alert-warning" role="alert">
+                <strong>Monci!</strong> Vous n'avez pas totalement rempli le formulaire.
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     {% if article.hide_image %}
     {% include "includes/hidden-image.html" %}
     {% endif %}
