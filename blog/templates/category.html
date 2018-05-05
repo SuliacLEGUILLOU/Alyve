@@ -13,16 +13,27 @@
 
     {% if articles %}
         {% include "includes/pagination.html" %}
-
+        <div class="row">
         {% for article in articles %}
-            <div class="card{% if not foorlop.first %} margin-top{% endif %}">
-                <div class="card-body index-list">
-                    <a href="{% url 'blog:article' article.slug %}"><h4 class="card-title">{{ article.title }}</h4></a>
-                    <small>Écrit par {{ article.author }} le {{ article.publication_date|date }} dans <a href="{% url 'blog:category' article.category.slug %}">{{ article.category }}</a></small> 
-                </div>
-            </div> 
+        <div class="col">
+            <div class="card">
+                <img class="card-img-top card-img-top-list" src="/uploads/{{ article.cover }}" alt="Card image cap">
+                <div class="card-body">
+                        <a href="{% url 'blog:article' article.slug %}">
+                            <h2 class="card-title text-center">{{ forloop.counter}} {{ article.title }}</h2>
+                        </a>
+                        <span class="article-details">{{ article.publication_date|date }}</span>
+                        <div class="vertical-separator"></div>
+                        {{ article.content|markdown|truncatewords:20 }}
+                    </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+            </div>
+            <div class="row">
+        {% endif %}
         {% endfor %}
-        
+        </div>
         <span class="margin-top"></span>
         {% include "includes/pagination.html" %}
     {% else %}

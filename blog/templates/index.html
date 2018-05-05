@@ -5,18 +5,59 @@
 
 {% block content %}
 <div class="container">
+    {% if first and not articles.has_previous %}
+    <div class="card card-first-article">
+        {% if first.cover %}<div class="card-cover-image-big" style="background-image: url('/uploads/{{ first.cover }}')"></div>{% endif %}
+        <div class="card-body">
+            <a href="{% url 'blog:category' first.category.slug %}" class="article-category">{{ first.category.name }}</a>
+            <a href="{% url 'blog:article' first.slug %}">
+                <h2 class="card-title text-center">{{ first.title }}</h2>
+            </a>
+            <span class="article-details">{{ first.publication_date|date }}</span>
+            <div class="vertical-separator"></div>
+            {{ first.content|markdown|truncatewords:100 }}
+            <hr>
+            <p class="card-text article-social">
+                <span><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;{{ comments }} commentaire{% if comments > 1 %}s{% endif %}</span>
+                <span 
+                    class="mastodon-share-button"
+                    data-target="https://aly-ve.github.io/Mastodon-share-button/"
+                    data-name="{{ first.title }}"
+                    data-buttonstyle="btn-as-text float-md-right"
+                    data-text="Mastodon"
+                ></span> 
+                <a href="https://www.alyve.be" target="_blank" class="btn-as-text float-md-right">
+                    <i class="fa fa-diaspora" aria-hidden="true"></i>&nbsp; Diaspora*
+                </a>
 
+            </p>
+            <hr>
+        </div>
+    </div>
+    {% endif %}
     {% if articles %}
-        {% include "includes/pagination.html" %}
-
+        <div class="row">
         {% for article in articles %}
-            <div class="card{% if not foorlop.first %} margin-top{% endif %}">
-                <div class="card-body index-list">
-                    <a href="{% url 'blog:article' article.slug %}"><h4 class="card-title">{{ article.title }}</h4></a>
-                    <small>Écrit par {{ article.author }} le {{ article.publication_date|date }} dans <a href="{% url 'blog:category' article.category.slug %}">{{ article.category }}</a></small> 
-                </div>
-            </div> 
+        <div class="col">
+            <div class="card">
+                {% if article.cover %}<img class="card-img-top card-img-top-list" src="/uploads/{{ article.cover }}" alt="Card image cap">{% endif %}
+                <div class="card-body">
+                        <a href="{% url 'blog:category' article.category.slug %}" class="article-category">{{ article.category.name }}</a>
+                        <a href="{% url 'blog:article' article.slug %}">
+                            <h2 class="card-title text-center">{{ article.title }}</h2>
+                        </a>
+                        <span class="article-details">{{ article.publication_date|date }}</span>
+                        <div class="vertical-separator"></div>
+                        {{ article.content|markdown|truncatewords:20 }}
+                    </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+            </div>
+            <div class="row">
+        {% endif %}
         {% endfor %}
+        </div>
         <span class="margin-top"></span>
         {% include "includes/pagination.html" %}
     {% else %}
