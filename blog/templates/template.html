@@ -94,7 +94,7 @@
                         <span class="label">Catégories</span>
                         <ul>
                             {% for category in categories %}
-                            <li><a href="{% url 'blog:category' category.slug %}">{{ category.name }}</a></li>
+                            <li{% if not forloop.first %} class="vertical-separator"{% endif %}><a href="{% url 'blog:category' category.slug %}">{{ category.name }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
