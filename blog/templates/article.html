@@ -52,7 +52,7 @@
                         data-buttonstyle="btn-as-text float-md-right"
                         data-text="Mastodon"
                     ></span> 
-                    <a class="btn-as-text float-md-right" href="javascript:;" onclick="window.open('https://share.diasporafoundation.org/?url={{ request.META.HTTP_HOST }}{{ request.get_full_path }}&title={{ first.title }}','das','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=550'); return false;" rel="nofollow" target="_blank">
+                    <a class="btn-as-text float-md-right" href="javascript:;" onclick="window.open('https://share.diasporafoundation.org/?url={{ request.META.HTTP_HOST }}{{ request.get_full_path }}&title='+encodeURI('{{ article.title }}'),'das','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=550'); return false;" rel="nofollow" target="_blank">
                         <i class="fa fa-diaspora" aria-hidden="true"></i>&nbsp; Diaspora*
                     </a>
     
