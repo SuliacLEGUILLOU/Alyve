@@ -115,6 +115,10 @@ header li > a, header li > a:hover {
 ** Articles
 */
 
+.article img {
+    display: block;
+    margin: 0 auto;
+}
 .card-first-article img {
     display: none;
 }
