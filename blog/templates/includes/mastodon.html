@@ -15,7 +15,7 @@
 <script>
 var msbConfig = {
     openModal: function (name, target) {
-        alertify.confirm(document.querySelector('#mastodon-share-button'), () => {
+        alertify.confirm('Partager sur Mastodon', document.querySelector('#mastodon-share-button'), () => {
             msbOnShare(name, target)
         }, ()=>{})
     },
