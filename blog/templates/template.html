@@ -6,6 +6,8 @@
         <meta charset="utf-8">
         <title>{{ blog.name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/css/alertify/alertify.min.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/css/alertify/themes/default.min.css' %}"/>
         <link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/fork-awesome.min.css' %}"/>
@@ -49,21 +51,43 @@
                     <div class="social">
                         <span class="label">Suivez moi</span>
                         <div class="row">
+                            {% for s in social %}
+                            {% if s.sidebar %}
                             <div class="col">
                                 <div class="socialbox">
-                                        <i class="fa fa-2x fa-mastodon" aria-hidden="true"></i>&nbsp;Mastodon 
+                                    <a href="{{ s.link }}" target="_blank" >
+                                    {% if s.network == 'RSS_FLUX' %}
+                                        <i class="fa fa-2x fa-rss" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'GITHUB' %}
+                                        <i class="fa fa-2x fa-github" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'LINKED_IN' %}
+                                        <i class="fa fa-2x fa-linkedin" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'INSTAGRAM' %}
+                                        <i class="fa fa-2x fa-instagram" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'FACEBOOK' %}
+                                        <i class="fa fa-2x fa-facebook-square" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'BITBUCKET' %}
+                                        <i class="fa fa-2x fa-bitbucket" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'GOOGLE_PLUS' %}
+                                        <i class="fa fa-2x fa-google-plus" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'YOUTUBE' %}
+                                        <i class="fa fa-2x fa-youtube-play" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'MASTODON' %}
+                                        <i class="fa fa-2x fa-mastodon" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'PEERTUBE' %}
+                                        <i class="fa fa-2x fa-peertube" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% elif s.network == 'DIASPORA' %}
+                                        <i class="fa fa-2x fa-diaspora" aria-hidden="true"></i><br/>{{ s.shortcut }}
+                                    {% endif %}
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="socialbox">
-                                        <i class="fa fa-2x fa-mastodon" aria-hidden="true"></i>&nbsp;Mastodon 
-                                </div>
+                            {% endif %}
+                            {% if forloop.counter|divisibleby:3 %}
                             </div>
-                            <div class="col">
-                                <div class="socialbox">
-                                        <i class="fa fa-2x fa-mastodon" aria-hidden="true"></i>&nbsp;Mastodon 
-                                </div>
-                            </div>
+                            <div class="row">
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     {% if categories %}
@@ -122,9 +146,7 @@
         </footer>
 
     {% include "includes/mastodon.html" %}
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{% static 'blog/js/alertify.min.js' %}"></script>
     <script src="{% static 'blog/js/blog.js' %}"></script>
     <script src="{% static 'blog/js/mastodon.js' %}"></script>
     </body>

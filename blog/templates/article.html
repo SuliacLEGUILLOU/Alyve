@@ -32,17 +32,13 @@
         {% endfor %}
     {% endif %}
 
-    {% if article.hide_image %}
-    {% include "includes/hidden-image.html" %}
-    {% endif %}
     <section class="article{% if article.hide_image %} hidden{% endif %}">
         <div class="card">
             {% if article.cover %}<div class="card-cover-image-big" style="background-image: url('/uploads/{{ article.cover }}')"></div>{% endif %}
             <div class="card-body">
                 <a href="{% url 'blog:category' article.category.slug %}" class="article-category">{{ article.category.name }}</a>
-                <a href="{% url 'blog:article' article.slug %}">
-                    <h2 class="card-title text-center">{{ article.title }}</h2>
-                </a>
+                <h2 class="card-title text-center">{{ article.title }}</h2>
+
                 <span class="article-details">{{ article.publication_date|date }}</span>
                 <div class="vertical-separator"></div>
                 {{ article.content|markdown }}
@@ -109,4 +105,13 @@
         <div class="alert alert-primary">Veuillez ajouter une ou plusieurs questions pour activer les commentaires</div>
         {% endif %}
     </section>
+
+    {% if article.hide_image %}
+        <script>
+            let contentWarning = {
+                display: true,
+                content: '{{ article.disclaimer }}'
+            }
+        </script>
+    {% endif %}
 {% endblock %}

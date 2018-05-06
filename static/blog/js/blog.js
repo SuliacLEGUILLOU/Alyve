@@ -1,16 +1,18 @@
-$(document).ready(function() {
-    try {
-        $('#modal-hidden-image').modal('show');
+(function() {
 
-        $('#hidden-image-display-all').addEventListener('click', function() {
-            $('#modal-hidden-image').modal('hide');
-            $('.hidden img').forEach(function(e) {
-                e.style.display = "block"
-            })
-        })
+    try {
+        if (contentWarning !== undefined) {
+            alertify.confirm('Attention !', contentWarning.content, () => {
+                document.querySelectorAll('.hidden img').forEach(e => { e.style.display = 'block' })
+            }, () => {})
+        }
+
+        /*document.querySelector('#hidden-image-display-all').addEventListener('click', function() {
+            let images = document.querySelectorAll('.hidden img')
+            images.forEach(element => { element.style.display = 'block' });
+        })*/
     }
     catch(err) {
-        console.log(err)
     }
 
-})
+})()
