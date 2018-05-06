@@ -34,9 +34,11 @@ class ArticleAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('username', 'publication_date', 'content', 'valided')
 
+class SocialAdmin(admin.ModelAdmin):
+    list_display = ('network', 'link', 'sidebar')
 
 admin.site.register(Blog, BlogAdmin)
-admin.site.register(Social)
+admin.site.register(Social, SocialAdmin)
 admin.site.register(Link)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
