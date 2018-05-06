@@ -17,7 +17,12 @@ SOCIAL_CHOICES = (
     ('GITHUB', 'Github'),
     ('BITBUCKET', 'Bitbucket'),
     ('GOOGLE_PLUS', 'Google+'),
-    ('YOUTUBE', 'Youtube')
+    ('YOUTUBE', 'Youtube'),
+    ('MASTODON', 'Mastodon'),
+    ('DIASPORA', 'Diaspora'),
+    ('PEERTUBE', 'Peertube'),
+    ('PATREON', 'Patreon'),
+    ('DISCORD', 'Discord')
 )
 
 class Blog(models.Model):
@@ -30,6 +35,7 @@ class Blog(models.Model):
 
 class Media(models.Model):
     file = models.FileField(upload_to='media/')
+    title = models.CharField('Nom', max_length=100, blank=True, null=True)
 
 class Page(models.Model):
     name = models.CharField('Nom', max_length=100)
@@ -102,7 +108,7 @@ class Link(models.Model):
     sort = models.IntegerField('Ordre', default="5")
     link = models.URLField('Lien')
     shortcut = models.CharField('Titre', max_length=60)
-
+    
     def __str__(self):
         return self.shortcut
 
@@ -115,6 +121,7 @@ class Social(models.Model):
     link = models.URLField('Lien')
     network = models.CharField('Réseau', choices=SOCIAL_CHOICES, max_length=16, blank=True, null=True)
     shortcut = models.CharField('Titre', max_length=60)
+    sidebar = models.BooleanField('Affiché dans la sidebar', default=False)
 
     def __str__(self):
         return self.shortcut

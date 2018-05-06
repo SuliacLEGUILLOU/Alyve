@@ -1,0 +1,28 @@
+{% load static %}
+<div style="display: none;">
+<div id="mastodon-share-button">
+    <div class="form-group">
+        <label for="msb-address">Entrez l'adresse de l'instance</label>
+        <input type="text" class="form-control" id="msb-address" placeholder="https://framapiaf.org">
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="msb-memorize-instance">
+        <label class="form-check-label" for="msb-memorize-instance">Mémoriser l'instance</label>
+    </div>
+</div>
+</div>
+{% block mastodon %}
+<script>
+var msbConfig = {
+    openModal: function (name, target) {
+        alertify.confirm(document.querySelector('#mastodon-share-button'), () => {
+            msbOnShare(name, target)
+        }, ()=>{})
+    },
+    addressFieldSelector: '.ajs-body input#msb-address',
+    buttonModalSelector: '.ajs-button ajs-ok',
+    memorizeFieldId: 'msb-memorize-instance',
+    buttonIconHtml: '<i class="fa fa-mastodon" aria-hidden="true"></i>'
+};
+</script>
+{% endblock %}

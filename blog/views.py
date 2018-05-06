@@ -13,11 +13,13 @@ from random import randint
 class IndexView(generic.ListView):
     model = Article
     template_name = 'index.html'
-    pagined_by = 10
+    pagined_by = 6
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        articles = Article.objects.filter(published=True).order_by('-publication_date')
+        articles = Article.objects.filter(published=True).order_by('-publication_date')[1:]
+        firstArticle = Article.objects.filter(published=True).order_by('-pk')[0]
+        comments = Comment.objects.filter(article=firstArticle.pk, valided=True).order_by('-pk')
         paginator = Paginator(articles, self.pagined_by)
 
         page = self.request.GET.get('page')
@@ -30,6 +32,8 @@ class IndexView(generic.ListView):
             articles_page = paginator.page(paginator.num_pages)
 
         context['articles'] = articles_page
+        context['first'] = firstArticle
+        context['comments'] = comments.count
         context['blog'] = Blog.objects.get(pk=1)
         context['pages'] = Page.objects.filter(displayed=True)
         context['categories'] = Category.objects.all()
@@ -40,20 +44,32 @@ class IndexView(generic.ListView):
 class CategoryView(generic.ListView):
     
     template_name = 'category.html'
-    
+    pagined_by = 6
+
     def get_queryset(self):
         self.category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Article.objects.filter(published=True, category=self.category).order_by('-publication_date')
 
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
+        
+        paginator = Paginator(self.get_queryset(), self.pagined_by)
+        page = self.request.GET.get('page')
+
+        try:
+            articles_page = paginator.page(page)
+        except PageNotAnInteger:
+            articles_page = paginator.page(1)
+        except EmptyPage:
+            articles_page = paginator.page(paginator.num_pages)
+
         context['blog'] = Blog.objects.get(pk=1)
         context['pages'] = Page.objects.filter(displayed=True)
         context['categories'] = Category.objects.all()
         context['links'] = Link.objects.order_by('sort')
         context['social'] = Social.objects.order_by('sort')
         context['category'] = self.category
-        context['articles'] = self.get_queryset()
+        context['articles'] = articles_page
         del context['article_list']
         return context
 
@@ -63,7 +79,7 @@ class ArticleView(generic.DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
-        print(context)
+        
         context['blog'] = Blog.objects.get(pk=1)
         context['pages'] = Page.objects.filter(displayed=True)
         context['comments'] = Comment.objects.filter(article=self.object.id, valided=True).order_by('-pk')

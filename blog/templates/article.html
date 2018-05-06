@@ -13,16 +13,7 @@
     {% endif %}
 {% endblock %}
 
-{% block header %}
-    <h3 class="maintitle">{{ article.title }}</h3>
-    <i class="fa fa-clock-o" aria-hidden="true"></i> Écrit le {{ article.publication_date|date }} |
-    <i class="fa fa-user" aria-hidden="true"></i> Par {{ article.author }} |
-    <i class="fa fa-comments" aria-hidden="true"></i> <a href="#comments">{{ comments|length }} commentaire{% if comments|length > 1 %}s{% endif %}</a> |
-    <i class="fa fa-folder" aria-hidden="true"></i> <a href="{% url 'blog:category' article.category.slug %}">{{ article.category.name }}</a>
-{% endblock %}
-
 {% block content %} 
-
     {% if messages %}
         {% for message in messages %}
             {% if message|stringformat:"s" == "COMMENT_ADDED" %}
@@ -41,15 +32,37 @@
         {% endfor %}
     {% endif %}
 
-    {% if article.hide_image %}
-    {% include "includes/hidden-image.html" %}
-    {% endif %}
     <section class="article{% if article.hide_image %} hidden{% endif %}">
-        {{ article.content|markdown }}
+        <div class="card">
+            {% if article.cover %}<div class="card-cover-image-big" style="background-image: url('/uploads/{{ article.cover }}')"></div>{% endif %}
+            <div class="card-body">
+                <a href="{% url 'blog:category' article.category.slug %}" class="article-category">{{ article.category.name }}</a>
+                <h2 class="card-title text-center">{{ article.title }}</h2>
 
+                <span class="article-details">{{ article.publication_date|date }}</span>
+                <div class="vertical-separator"></div>
+                {{ article.content|markdown }}
+                <hr>
+                <p class="card-text article-social">
+                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Publié par {{ article.author.username }}</span>
+                    <span 
+                        class="mastodon-share-button"
+                        data-target="https://aly-ve.github.io/Mastodon-share-button/"
+                        data-name="{{ article.title }}"
+                        data-buttonstyle="btn-as-text float-md-right"
+                        data-text="Mastodon"
+                    ></span> 
+                    <a class="btn-as-text float-md-right" href="javascript:;" onclick="window.open('https://share.diasporafoundation.org/?url='+encodeURIComponent(location.href)+'&title={{ first.title }}','das','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=550'); return false;" rel="nofollow" target="_blank">
+                        <i class="fa fa-diaspora" aria-hidden="true"></i>&nbsp; Diaspora*
+                    </a>
+    
+                </p>
+                <hr>
+            </div>
+        </div>
         <hr>
         {% if comments %}
-        <h4 id="comments">Commentaires {% if comments %}({{ comments|length }}){% endif %}</h4>
+        <h4 id="comments">{{ comments|length }} Commentaire{% if comments|length > 1 %}s{% endif %}</h4>
         <ul class="list-group">
             {% for comment in comments %}
             <li class="list-group-item">
@@ -92,4 +105,13 @@
         <div class="alert alert-primary">Veuillez ajouter une ou plusieurs questions pour activer les commentaires</div>
         {% endif %}
     </section>
+
+    {% if article.hide_image %}
+        <script>
+            let contentWarning = {
+                display: true,
+                content: '{{ article.disclaimer }}'
+            }
+        </script>
+    {% endif %}
 {% endblock %}
