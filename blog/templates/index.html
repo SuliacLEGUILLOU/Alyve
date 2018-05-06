@@ -11,7 +11,7 @@
         <div class="card-body">
             <a href="{% url 'blog:category' first.category.slug %}" class="article-category">{{ first.category.name }}</a>
             <a href="{% url 'blog:article' first.slug %}">
-                <h2 class="card-title text-center">{{ first.title }}</h2>
+                <h2 class="card-title text-center article-title">{{ first.title }}</h2>
             </a>
             <span class="article-details">{{ first.publication_date|date }}</span>
             <div class="vertical-separator"></div>
