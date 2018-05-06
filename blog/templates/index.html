@@ -26,10 +26,9 @@
                     data-buttonstyle="btn-as-text float-md-right"
                     data-text="Mastodon"
                 ></span> 
-                <a href="https://www.alyve.be" target="_blank" class="btn-as-text float-md-right">
+                <a class="btn-as-text float-md-right" href="javascript:;" onclick="window.open('https://share.diasporafoundation.org/?url='+encodeURIComponent(location.href)+'&title={{ first.title }}','das','location=no,links=no,scrollbars=no,toolbar=no,width=620,height=550'); return false;" rel="nofollow" target="_blank">
                     <i class="fa fa-diaspora" aria-hidden="true"></i>&nbsp; Diaspora*
                 </a>
-
             </p>
             <hr>
         </div>
@@ -38,13 +37,13 @@
     {% if articles %}
         <div class="row">
         {% for article in articles %}
-        <div class="col">
+        <div class="col-lg">
             <div class="card">
                 {% if article.cover %}<img class="card-img-top card-img-top-list" src="/uploads/{{ article.cover }}" alt="Card image cap">{% endif %}
                 <div class="card-body">
                         <a href="{% url 'blog:category' article.category.slug %}" class="article-category">{{ article.category.name }}</a>
                         <a href="{% url 'blog:article' article.slug %}">
-                            <h2 class="card-title text-center">{{ article.title }}</h2>
+                            <h2 class="card-title text-center article-title">{{ article.title }}</h2>
                         </a>
                         <span class="article-details">{{ article.publication_date|date }}</span>
                         <div class="vertical-separator"></div>

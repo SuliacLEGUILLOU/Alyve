@@ -140,6 +140,13 @@ header li > a, header li > a:hover {
     color: #FF3366;
 }
 
+.article-title,
+.article-title:hover,
+.article-category,
+.article-category:hover {
+    transition-duration: .3s;
+}
+
 .article-details {
     display: inline-block;
     margin-bottom: 1em;
@@ -197,9 +204,16 @@ a h2:hover { color: #FF3366; }
 
 @media (max-width: 1199.98px) {
     .sidebar img {
+        display: block;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;   
         margin-top: 2em;
-        max-width: 50%;
     }
+    header {
+        height: 20vh;
+    }
+    
 }
 
 .hidden img {
@@ -236,3 +250,5 @@ a h2:hover { color: #FF3366; }
 }
 
 .primary { color: #FF3366; }
+
+#mastodon-share-button { display: none; }
