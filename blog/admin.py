@@ -37,12 +37,18 @@ class CommentAdmin(admin.ModelAdmin):
 class SocialAdmin(admin.ModelAdmin):
     list_display = ('network', 'link', 'sidebar')
 
+class MediaAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'file', 'title')
+
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('link', 'shortcut', 'sort')
+
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Social, SocialAdmin)
-admin.site.register(Link)
+admin.site.register(Link, LinkAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Page, PageAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Media)
+admin.site.register(Media, MediaAdmin)

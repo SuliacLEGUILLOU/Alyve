@@ -35,6 +35,7 @@ class Blog(models.Model):
 
 class Media(models.Model):
     file = models.FileField(upload_to='media/')
+    title = models.CharField('Nom', max_length=100, blank=True, null=True)
 
 class Page(models.Model):
     name = models.CharField('Nom', max_length=100)
