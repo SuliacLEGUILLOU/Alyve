@@ -4,6 +4,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{ blog.name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/alertify/alertify.min.css' %}"/>
@@ -18,7 +19,7 @@
         <p class="description">{{blog.description }}</p>
 
         <ul>
-            <li><a href="{% url 'blog:index' %}">Acceuil</a></li>
+            <li><a href="{% url 'blog:index' %}">Accueil</a></li>
             {% if pages %}
             {% for page in pages %}
             <li><a href="{% url 'blog:page' page.slug %}">{{ page.name }}</a></li>

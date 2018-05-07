@@ -86,8 +86,8 @@ header li > a, header li > a:hover {
 .socialbox a:hover {
     transition-duration: .3s;
 }
-.socialbox a { color: #5b5b5b; }
-.socialbox a:hover { color: black; }
+.sidebar a { color: #5b5b5b; }
+.sidebar a:hover { color: black; }
 
 .categories-list li {
     font-size: .9rem;
@@ -118,6 +118,7 @@ header li > a, header li > a:hover {
 .article img {
     display: block;
     margin: 0 auto;
+    max-width: 80%;
 }
 .card-first-article img {
     display: none;

@@ -20,7 +20,7 @@
                 <img class="card-img-top card-img-top-list" src="/uploads/{{ article.cover }}" alt="Card image cap">
                 <div class="card-body">
                         <a href="{% url 'blog:article' article.slug %}">
-                            <h2 class="card-title text-center">{{ forloop.counter}} {{ article.title }}</h2>
+                            <h2 class="card-title text-center article-title">{{ article.title }}</h2>
                         </a>
                         <span class="article-details">{{ article.publication_date|date }}</span>
                         <div class="vertical-separator"></div>
