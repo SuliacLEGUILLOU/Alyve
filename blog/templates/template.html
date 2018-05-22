@@ -4,13 +4,14 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{{ blog.name }}</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ blog.name }}{% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/alertify/alertify.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/alertify/themes/default.min.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/fork-awesome.min.css' %}"/>
+        <link rel="icon" href="{% static 'blog/img/favicon.png' %}"/>
     </head>
     <body>
 
@@ -48,6 +49,7 @@
                     {% if blog.sidebar_description %}
                         {{ blog.sidebar_description|markdown }}
                     {% endif %}
+                    {% if social %}
                     <div class="social">
                         <span class="label">Suivez moi</span>
                         <div class="row">
@@ -90,6 +92,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
                     {% if categories %}
                     <div class="categories-list vertical-separator">
                         <span class="label">Catégories</span>

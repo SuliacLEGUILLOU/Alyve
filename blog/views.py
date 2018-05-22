@@ -18,8 +18,9 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         articles = Article.objects.filter(published=True).order_by('-publication_date')[1:]
-        firstArticle = Article.objects.filter(published=True).order_by('-pk')[0]
-        comments = Comment.objects.filter(article=firstArticle.pk, valided=True).order_by('-pk')
+        tmpArticles = Article.objects.filter(published=True).order_by('-pk')
+        firstArticle = tmpArticles[0] if len(tmpArticles) > 0 else None
+        comments = Comment.objects.filter(article=firstArticle.pk, valided=True).order_by('-pk') if len(Comment.objects.all()) > 0 else []
         paginator = Paginator(articles, self.pagined_by)
 
         page = self.request.GET.get('page')
@@ -89,10 +90,12 @@ class ArticleView(generic.DetailView):
 
         # get a random question for comment something
         question_count = Question.objects.count()
-        index = randint(0, question_count-1)
-        if index is not None:
-            context['question'] = Question.objects.all()[index]
-        
+        if question_count > 0:
+            index = randint(0, question_count-1)
+            if index is not None:
+                context['question'] = Question.objects.all()[index]
+        else:
+            question_count = 0
         return context
 
 class PageView(generic.DetailView):
