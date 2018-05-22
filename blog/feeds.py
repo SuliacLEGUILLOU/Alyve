@@ -21,7 +21,7 @@ class LatestArticlesFeed(Feed):
         return reverse('blog:article', args=[item.slug])
 
 class UnvalidedCommentsFeed(Feed):
-    title = "Commentaires du blog"
+    title = "Commentaires du blog (non validés)"
     description = "Derniers commentaires non validés"
     link = "feeds/"
 
@@ -36,3 +36,20 @@ class UnvalidedCommentsFeed(Feed):
     
     def item_link(self, item):
         return reverse('blog:index')
+
+class ValidedCommentsFeed(Feed):
+    title = "Commentaires du blog"
+    description = 'Flux des commentaires'
+    link = 'feeds/'
+
+    def items(self):
+        return Comment.objects.order_by('-publication_date')[:50]
+    
+    def item_title(self, item):
+        return item.username
+    
+    def item_description(self, item):
+        return item.content
+    
+    def item_link(self, item):
+        return reverse('blog:article', args=[item.article.slug])
