@@ -168,6 +168,21 @@ header li > a, header li > a:hover {
 }
 
 /*
+** Comment seciton
+*/
+
+.card-header-comment {
+    background-color: black; 
+    color: #F5F5F5;}
+.comment-even,
+.comment-odd {
+    border-radius: 0px; }
+.comment-even {
+    background-color: rgba(0, 0, 0, 0.02); }
+.comment-odd {
+    background-color: rgba(0, 0, 0, 0.08); }
+
+/*
 ** Pagination
 */
 

@@ -94,8 +94,6 @@ class ArticleView(generic.DetailView):
             index = randint(0, question_count-1)
             if index is not None:
                 context['question'] = Question.objects.all()[index]
-        else:
-            question_count = 0
         return context
 
 class PageView(generic.DetailView):
