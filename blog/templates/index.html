@@ -1,8 +1,6 @@
 {% extends 'template.html' %}
 {% load markdown_deux_tags %}
 
-{% block title %} - {{ article.title }}{% endblock %}
-
 {% block content %}
 <div class="container">
     {% if first and not articles.has_previous %}

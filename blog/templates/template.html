@@ -12,6 +12,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/fork-awesome.min.css' %}"/>
         <link rel="icon" href="{% static 'blog/img/favicon.png' %}"/>
+
+        <meta property="og:title" content="Alyve" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+        <meta property="og:image" content="{{ request.build_absolute_uri }}uploads/{{ blog.sidebar_picture }}" />
     </head>
     <body>
 
