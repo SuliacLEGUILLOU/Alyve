@@ -1,10 +1,12 @@
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
+from .models import Blog
 
 from blog.models import Article, Comment
 
 class LatestArticlesFeed(Feed):
-    title = "Le blog d'Alysson"
+    blog = Blog.objects.get(pk=1)
+    title = "Derniers articles sur " + blog.name
     description = "Derniers articles"
     link = "feeds/"
 
