@@ -13,6 +13,14 @@
         <link rel="stylesheet" type="text/css" href="{% static 'blog/css/fork-awesome.min.css' %}"/>
         <link rel="icon" href="{% static 'blog/img/favicon.png' %}"/>
 
+        {% for s in social %}
+        {% if s.network == 'RSS_FLUX' %}
+            <link href="{{ s.link }}" rel="alternate" title="Rss feed" type="application/rss+xml">
+        {% else %}
+        {% endif %}
+        
+        {% endfor %}}
+
         {% block seo %}
         <meta property="og:title" content="Alyve" />
         <meta property="og:type" content="website" />
