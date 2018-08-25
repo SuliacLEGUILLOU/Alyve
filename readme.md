@@ -59,7 +59,7 @@ To migrate database and apply modifications, you need to follow these lines when
 ```
 $ python3 manage.py makemigrations blog
 $ python3 manage.py migrate
-$ python3 managy.py collectstatic
+$ python3 manage.py collectstatic
 ```
 
 And restart Alyve.
