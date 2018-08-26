@@ -11,7 +11,15 @@ class LatestArticlesFeed(Feed):
     link = "feeds/"
 
     def items(self):
-        return Article.objects.order_by('-publication_date')[:10]
+        allArticles = Article.objects.order_by('-publication_date')
+        artticles = []
+        for article in allArticles:
+            if article.published:
+                artticles.append(article)
+            if len(artticles) == 10:
+                break
+        return artticles
+
     
     def item_title(self, item):
         return item.title
